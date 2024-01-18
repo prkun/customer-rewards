@@ -21,8 +21,8 @@ A retailer offers a rewards program to its customers, awarding points based on e
 1. Clone the repository and change directory.
 
 ```
-git clone https://github.com/RaulB-masai/react-image-compressor.git
-cd react-image-compressor
+git clone https://github.com/prkun/customer-rewards.git
+cd customer-rewards
 ```
 
 2. Install npm dependencies
