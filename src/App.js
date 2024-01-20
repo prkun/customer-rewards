@@ -1,5 +1,6 @@
 import './App.css';
 import RewardPoints from './components/Rewards';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
 
@@ -8,6 +9,7 @@ const App = () => {
       <RewardPoints />
     </div>
   );
+
 }
 
 export default App;

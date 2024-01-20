@@ -37,8 +37,17 @@ npm install
 npm start
 ```
 
+## Production
+Builds the app for production to the build folder.
+
+```
+npm run build
+```
+
+The build is minified and the filenames include the hashes. 
+
 ## Test
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
 ```
 npm test
