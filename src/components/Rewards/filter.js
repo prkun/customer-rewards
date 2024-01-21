@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { getCustomers } from "../../services/purchases.services";
+import { sleep } from "../../utils/utils";
 
-const RewardsFilter = ({ filter, updateFilter }) => {
+const RewardsFilter = ({ updateFilter }) => {
     const [customers, setCustomers] = useState([]);
     const [customer, setCustomer] = useState("");
     const [fromDate, setFromDate] = useState("");
@@ -10,6 +11,7 @@ const RewardsFilter = ({ filter, updateFilter }) => {
 
     useEffect(() => {
         (async () => {
+            await sleep(2000);
             const customersList = await getCustomers();
             setCustomers(customersList);
             console.log("Customers: ", customersList);

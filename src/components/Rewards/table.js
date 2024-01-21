@@ -13,24 +13,26 @@ const RewardsTable = ({ purchases }) => {
                                 <th>Customer Name</th>
                                 <th>PO Number</th>
                                 <th>PO Date</th>
+                                <th>PO Amount</th>
                                 <th>Reward Points</th>
                             </tr>
                         </thead>
                         <tbody align="center">
-                            {(!purchases || purchases.length === 0) && (
+                            {(purchases && purchases.length) ?
+                                purchases?.map((purchase, index) => (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{purchase.custName}</td>
+                                        <td>{purchase.poNumber}</td>
+                                        <td>{purchase.poDate}</td>
+                                        <td>${purchase.poAmount}</td>
+                                        <td>{purchase.rewardPoints}</td>
+                                    </tr>
+                                )) :
                                 <tr>
-                                    <td colSpan={5}>No Data</td>
+                                    <td colSpan={6}>No Data</td>
                                 </tr>
-                            )}
-                            {purchases && purchases.length > 0 && purchases?.map((purchase, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{purchase.custName}</td>
-                                    <td>{purchase.poNumber}</td>
-                                    <td>{purchase.poDate}</td>
-                                    <td></td>
-                                </tr>
-                            ))}
+                            }
                         </tbody>
                     </Table>
                 </Col>
