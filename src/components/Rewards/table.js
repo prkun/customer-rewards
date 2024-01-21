@@ -1,37 +1,40 @@
-import { Container, Table } from "react-bootstrap"
+import React from "react"
+import { Col, Container, Row, Table } from "react-bootstrap"
 
-const RewardsTable = () => {
+const RewardsTable = ({ purchases }) => {
     return (
         <Container className="p-3">
-            <Table responsive striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td colSpan={2}>Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </Table>
+            <Row>
+                <Col>
+                    <Table responsive striped bordered hover>
+                        <thead align="center">
+                            <tr>
+                                <th>#</th>
+                                <th>Customer Name</th>
+                                <th>PO Number</th>
+                                <th>PO Date</th>
+                                <th>Reward Points</th>
+                            </tr>
+                        </thead>
+                        <tbody align="center">
+                            {(!purchases || purchases.length === 0) && (
+                                <tr>
+                                    <td colSpan={5}>No Data</td>
+                                </tr>
+                            )}
+                            {purchases && purchases.length > 0 && purchases?.map((purchase, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{purchase.custName}</td>
+                                    <td>{purchase.poNumber}</td>
+                                    <td>{purchase.poDate}</td>
+                                    <td></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
         </Container>
     )
 }

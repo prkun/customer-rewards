@@ -1,9 +1,10 @@
 import { Container } from "react-bootstrap";
 
-const RewardsTotal = () => {
+const RewardsTotal = ({ total, filter }) => {
+
     return (
         <Container className="p-4">
-            <h4>Customer:  earned total of 900 Reward Points between --- and ----</h4>
+            <h4>{filter?.customer?.name} has earned a total of {total} Reward Points for the period between {filter?.fromDate || ""} and {filter?.toDate || ""}</h4>
         </Container>
     )
 
