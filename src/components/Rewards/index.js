@@ -12,47 +12,65 @@ const RewardPoints = () => {
     const [rewardsTotalPoints, setRewardsTotalPoints] = useState(null);
     const [rewardsTableData, setRewardsTableData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (filter) {
             (async () => {
-                setLoading(true);
-                await sleep(2000);
-                const purchases = await getPurchases();
-                setLoading(false);
-                const filterCustPurchases = purchases && purchases.length && purchases?.filter((po) => po.custId === filter?.customer?.id);
-                const custPurchasesAndRewards = filterCustPurchases && filterCustPurchases.length && filterCustPurchases.map((obj) => ({ ...obj, rewardPoints: calculateRewardPoints(obj.poAmount) }));
-                setRewardsTableData(custPurchasesAndRewards || []);
-                calculateTotalRewards(custPurchasesAndRewards);
-                console.log(custPurchasesAndRewards);
+                try {
+                    setLoading(true);
+                    await sleep(2000);
+
+                    const purchases = await getPurchases();
+                    setLoading(false);
+
+                    const filterCustPurchases = purchases
+                        && purchases?.length
+                        && purchases?.filter((po) => po.custId === filter?.customer?.id);
+
+                    const custPurchasesAndRewards = filterCustPurchases
+                        && filterCustPurchases?.length
+                        && filterCustPurchases?.map((obj) => ({ ...obj, rewardPoints: calculateRewardPoints(obj.poAmount) }));
+
+                    setRewardsTableData(custPurchasesAndRewards || []);
+
+                    calculateTotalRewards(custPurchasesAndRewards);
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                    setError({ error });
+                }
             })();
         }
     }, [filter])
 
     const calculateTotalRewards = (custPurchasesAndRewards) => {
-        const totalRewardPoints = custPurchasesAndRewards && custPurchasesAndRewards.reduce((accumulator, currentValue) => accumulator + currentValue.rewardPoints, 0)
+        const totalRewardPoints = custPurchasesAndRewards
+            && custPurchasesAndRewards?.reduce((accumulator, currentValue) => accumulator + currentValue?.rewardPoints, 0)
+
         setRewardsTotalPoints(totalRewardPoints);
     }
 
     const updateFilter = (appliedFilter) => {
         setFilter(appliedFilter);
-        console.log(appliedFilter);
     }
 
     return (
-        <Container fluid className="p-3">
+        <Container fluid className='p-3'>
             <h2 className='header'>Customer Reward Points</h2>
             <RewardsFilter filter={filter} updateFilter={updateFilter} />
             {!loading && rewardsTotalPoints && <RewardsTotal total={rewardsTotalPoints} />}
             {loading ?
                 (
                     <div className='loader'>
-                        <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading...</span>
+                        <Spinner animation='border' role='status'>
+                            <span className='visually-hidden'>Loading...</span>
                         </Spinner>
                     </div>
                 ) :
                 <RewardsTable purchases={rewardsTableData} />}
+            {error &&
+                <div>An error occurred: {error.message}</div>
+            }
         </Container>
     )
 }

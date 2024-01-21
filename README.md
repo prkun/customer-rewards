@@ -11,9 +11,11 @@ A retailer offers a rewards program to its customers, awarding points based on e
 
 - Given a record of every transaction during a three month period, calculate the reward points earned for each customer per month and total.
 
+![](/screenshot.png)
+
 ## Built With
 
-- ReactJS
+- React JS
 - React Bootstrap
 
 ## Development

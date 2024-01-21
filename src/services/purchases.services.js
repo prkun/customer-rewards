@@ -6,7 +6,7 @@ export const getPurchases = async () => {
     const response = await axios.get(endPoints.purchases_get);
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('An error occurred:', error);
   }
 }
 
@@ -15,7 +15,7 @@ export const getCustomers = async () => {
     const response = await axios.get(endPoints.customers_get);
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('An error occurred:', error);
   }
 }
 
