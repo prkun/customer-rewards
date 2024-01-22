@@ -50,6 +50,7 @@ The build is minified and the filenames include the hashes.
 
 ## Test
 Launches the test runner in the interactive watch mode.
+Simulated API tests require "http://localhost:3000" to be up and running in another terminal (npm start). 
 
 ```
 npm test
