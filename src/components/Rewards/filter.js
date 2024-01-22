@@ -13,7 +13,7 @@ const RewardsFilter = ({ updateFilter }) => {
     useEffect(() => {
         (async () => {
             try {
-                await sleep(2000);
+                await sleep(1000);
                 const customersList = await getCustomers();
                 setCustomers(customersList);
             } catch (error) {

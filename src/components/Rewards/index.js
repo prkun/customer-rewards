@@ -19,14 +19,22 @@ const RewardPoints = () => {
             (async () => {
                 try {
                     setLoading(true);
-                    await sleep(2000);
+                    await sleep(1000);
 
                     const purchases = await getPurchases();
                     setLoading(false);
 
+                    const startDate = new Date(filter?.fromDate);
+                    const endDate = new Date(filter?.toDate);
                     const filterCustPurchases = purchases
                         && purchases?.length
-                        && purchases?.filter((po) => po.custId === filter?.customer?.id);
+                        && purchases?.filter((po) => {
+                            const date = new Date(po?.poDate);
+                            if (po.custId === filter?.customer?.id)
+                                debugger
+                            return ((po.custId === filter?.customer?.id) && (date >= startDate && date <= endDate))
+                        });
+
 
                     const custPurchasesAndRewards = filterCustPurchases
                         && filterCustPurchases?.length
@@ -44,10 +52,15 @@ const RewardPoints = () => {
     }, [filter])
 
     const calculateTotalRewards = (custPurchasesAndRewards) => {
-        const totalRewardPoints = custPurchasesAndRewards
-            && custPurchasesAndRewards?.reduce((accumulator, currentValue) => accumulator + currentValue?.rewardPoints, 0)
+        try {
+            const totalRewardPoints = custPurchasesAndRewards
+                && custPurchasesAndRewards?.reduce((accumulator, currentValue) => accumulator + currentValue?.rewardPoints, 0)
 
-        setRewardsTotalPoints(totalRewardPoints);
+            setRewardsTotalPoints(totalRewardPoints);
+        } catch (error) {
+            console.error('An error occurred:', error);
+            setError({ error });
+        }
     }
 
     const updateFilter = (appliedFilter) => {

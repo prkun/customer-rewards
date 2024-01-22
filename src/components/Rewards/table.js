@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
+import { convertDateFormat } from '../../utils/utils'
 
 const RewardsTable = ({ purchases }) => {
     return (
@@ -24,7 +25,7 @@ const RewardsTable = ({ purchases }) => {
                                         <td>{index + 1}</td>
                                         <td>{purchase?.custName}</td>
                                         <td>{purchase?.poNumber}</td>
-                                        <td>{purchase?.poDate}</td>
+                                        <td>{convertDateFormat(purchase?.poDate)}</td>
                                         <td>${purchase?.poAmount}</td>
                                         <td>{purchase?.rewardPoints}</td>
                                     </tr>
