@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 import { getPurchases } from '../../services/purchases.services';
-import { calculateRewardPoints, sleep } from '../../utils/utils';
+import { calculateRewardPoints } from '../../utils/calculateRewardPoints';
+import { sleep } from '../../utils/sleep';
 import RewardsFilter from './filter';
 import './styles.css';
 import RewardsTable from './table';
@@ -30,8 +31,6 @@ const RewardPoints = () => {
                         && purchases?.length
                         && purchases?.filter((po) => {
                             const date = new Date(po?.poDate);
-                            if (po.custId === filter?.customer?.id)
-                                debugger
                             return ((po.custId === filter?.customer?.id) && (date >= startDate && date <= endDate))
                         });
 

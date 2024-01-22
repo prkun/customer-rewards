@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { getCustomers } from '../../services/purchases.services';
-import { sleep } from '../../utils/utils';
+import { sleep } from '../../utils/sleep';
 
 const RewardsFilter = ({ updateFilter }) => {
     const [customers, setCustomers] = useState([]);

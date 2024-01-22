@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
-import { convertDateFormat } from '../../utils/utils'
+import { convertDateFormat } from '../../utils/convertDateFormat'
 
 const RewardsTable = ({ purchases }) => {
     return (
