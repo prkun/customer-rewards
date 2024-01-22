@@ -39,7 +39,7 @@ npm install
 npm start
 ```
 
-3. For Simulated API to work, app should be connected to Port 3000. "http://localhost:3000"
+4. For Simulated API to work, app should be connected to Port 3000. "http://localhost:3000"
 
 
 ## Production
